@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gửi vợ yêu 💐</title>
+<style>
+:root{--bg:#fff0f3;--card:#ffffff;--ink:#4a1d2b;--soft:#9b5a6c;--accent:#e63a6b;--accent2:#ff8fab;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1219;--card:#3a1b25;--ink:#ffe3ea;--soft:#e7a3b5;--accent:#ff5c8a;--accent2:#ff8fab;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a1219;--card:#3a1b25;--ink:#ffe3ea;--soft:#e7a3b5;--accent:#ff5c8a;--accent2:#ff8fab;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;display:flex;align-items:center;justify-content:center;padding:24px;overflow-x:hidden}
+.wrap{width:100%;max-width:420px;text-align:center;position:relative;z-index:2}
+#envelope{cursor:pointer;border:0;background:none;color:inherit;font:inherit}
+.env{font-size:110px;line-height:1;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px) rotate(3deg)}}
+.hint{color:var(--soft);margin-top:12px;font-size:18px}
+.card{display:none;background:var(--card);border-radius:20px;padding:28px 22px;box-shadow:0 10px 30px rgba(230,58,107,.25);text-align:left}
+.card h1{margin:0 0 14px;text-align:center;color:var(--accent);font-size:26px}
+.line{opacity:0;transform:translateY(8px);transition:all .7s;margin:10px 0;font-size:18px;line-height:1.55}
+.line.show{opacity:1;transform:none}
+.btn{display:none;margin:20px auto 0;padding:12px 22px;border-radius:999px;border:0;background:var(--accent);color:#fff;font-size:17px;font-family:inherit;cursor:pointer}
+#ly{display:none;margin-top:16px;padding-left:20px}
+#ly li{margin:8px 0;font-size:17px}
+.sign{text-align:right;color:var(--accent);margin-top:18px;font-style:italic}
+.fall{position:fixed;top:-40px;z-index:1;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:.7}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <button id="envelope" aria-label="Mở thiệp">
+    <div class="env">💌</div>
+    <div class="hint">Có một điều bất ngờ dành cho em. Chạm để mở nhé!</div>
+  </button>
+  <div class="card" id="card">
+    <h1>Chúc mừng 20/10 💐</h1>
+    <div id="lines"></div>
+    <button class="btn" id="more">Còn một điều nữa… 💖</button>
+    <ol id="ly">
+      <li>Vì em luôn lo cho cả nhà trước khi lo cho mình.</li>
+      <li>Vì nụ cười của em làm ngày của anh nhẹ đi.</li>
+      <li>Vì có em, nhà mới là nhà.</li>
+    </ol>
+    <div class="sign" id="sign" style="display:none">Yêu em nhiều, chồng em 🌹</div>
+  </div>
+</div>
+<script>
+var msgs=["Gửi vợ yêu của anh,","Cảm ơn em đã luôn ở bên, vất vả vì gia đình và vì anh.","Hôm nay là ngày của em, em hãy nghỉ ngơi và được yêu thương thật nhiều nhé.","Chúc em luôn xinh đẹp, khỏe mạnh và hạnh phúc. 🌸"];
+var em=["💖","🌸","🌹","💗","🌷","✨","💐"];
+function rain(n){for(var i=0;i<n;i++){(function(){var s=document.createElement("span");s.className="fall";s.textContent=em[Math.floor(Math.random()*em.length)];s.style.left=Math.random()*100+"vw";s.style.fontSize=(16+Math.random()*22)+"px";s.style.animationDuration=(4+Math.random()*5)+"s";s.style.animationDelay=(Math.random()*2)+"s";document.body.appendChild(s);setTimeout(function(){s.remove()},11000)})()}}
+document.getElementById("envelope").onclick=function(){
+  this.style.display="none";
+  var card=document.getElementById("card");card.style.display="block";
+  var box=document.getElementById("lines");
+  msgs.forEach(function(t,i){var d=document.createElement("div");d.className="line";d.textContent=t;box.appendChild(d);setTimeout(function(){d.classList.add("show")},400+i*1300)});
+  setTimeout(function(){document.getElementById("more").style.display="block"},400+msgs.length*1300);
+  rain(30);
+};
+document.getElementById("more").onclick=function(){
+  this.style.display="none";
+  document.getElementById("ly").style.display="block";
+  document.getElementById("sign").style.display="block";
+  rain(45);
+};
+</script>
+</body>
+</html>
